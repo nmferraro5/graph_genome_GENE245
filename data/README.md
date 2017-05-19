@@ -1,7 +1,14 @@
 # Data Sources
 
+#### Reference genome assembly used in 1000 genomes phase 3
+```
+wget http://ftp.1000genomes.ebi.ac.uk/vol1/ftp/technical/reference/human_g1k_v37.fasta.gz
+samtools index human_g1k_v37.fasta.gz
+```
+
 #### Individual BAM file High Cov 1000 genomes
 ```
+# Variables
 abca12='2:215793266-216065151'
 site=ftp://ftp.ncbi.nlm.nih.gov/1000genomes
 
@@ -14,6 +21,7 @@ wget $site/ftp/phase3/data/HG00096/high_coverage_alignment/HG00096.wgs.ILLUMINA.
 # Just get region of interest (gene)
 samtools view -h HG00096.wgs.ILLUMINA.bwa.GBR.high_cov_pcr_free.20140203.bam $abca12 > HG00096.wgs.ILLUMINA.bwa.GBR.high_cov_pcr_free.20140203.abca12.bam
 
+# Use bamToCns.sh to convert BAM to Consensus file
 ```
 
 #### 1000 genomes VCF files:
