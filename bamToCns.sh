@@ -7,8 +7,20 @@
 export PATH=/share/PI/pritch/Margaret/bin:$PATH
 source ~/.bashrc
 
+#TO GET REF.FA INPUT FILE
 # Downlaod Fasta hg19 file used in 1k genomes 
 # wget http://ftp.1000genomes.ebi.ac.uk/vol1/ftp/technical/reference/human_g1k_v37.fasta.gz
+
+# TO GET INPUT.BAM INPUT FILE
+# Download exome alignment file for individual in 1000k genome project
+# Download script for batches on Margaret's server test directory
+# ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/phase3/data/HG00096/exome_alignment/
+
+# Get bam index file
+# wget ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/phase3/data/HG00096/exome_alignment/HG00096.mapped.ILLUMINA.bwa.GBR.exome.20120522.bam.bai
+# Get bam file
+# wget ftp://ftp.1000genomes.ebi.ac.uk/vol1/ftp/phase3/data/HG00096/exome_alignment/HG00096.mapped.ILLUMINA.bwa.GBR.exome.20120522.bam
+# Make sure bam and index files are in same location. 
 
 #Access input bam file 
 inputFile=$1
