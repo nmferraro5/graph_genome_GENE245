@@ -1,0 +1,106 @@
+<!-- Sankey generated in R 3.3.2 by googleVis 0.6.2 package -->
+<!-- Tue May 23 16:40:53 2017 -->
+
+
+<!-- jsHeader -->
+<script type="text/javascript">
+ 
+// jsData 
+function gvisDataSankeyID85d35328195b () {
+var data = new google.visualization.DataTable();
+var datajson =
+[
+ [
+"c1",
+"rs1ref",
+0.3
+],
+[
+"c1",
+"rs1alt",
+0.7
+],
+[
+"rs1ref",
+"c2",
+1
+],
+[
+"rs1alt",
+"c2",
+1
+] 
+];
+data.addColumn('string','source');
+data.addColumn('string','target');
+data.addColumn('number','freq');
+data.addRows(datajson);
+return(data);
+}
+ 
+// jsDrawChart
+function drawChartSankeyID85d35328195b() {
+var data = gvisDataSankeyID85d35328195b();
+var options = {};
+options["width"] = 400;
+options["height"] = 400;
+
+
+    var chart = new google.visualization.Sankey(
+    document.getElementById('SankeyID85d35328195b')
+    );
+    chart.draw(data,options);
+    
+
+}
+  
+ 
+// jsDisplayChart
+(function() {
+var pkgs = window.__gvisPackages = window.__gvisPackages || [];
+var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
+var chartid = "sankey";
+  
+// Manually see if chartid is in pkgs (not all browsers support Array.indexOf)
+var i, newPackage = true;
+for (i = 0; newPackage && i < pkgs.length; i++) {
+if (pkgs[i] === chartid)
+newPackage = false;
+}
+if (newPackage)
+  pkgs.push(chartid);
+  
+// Add the drawChart function to the global list of callbacks
+callbacks.push(drawChartSankeyID85d35328195b);
+})();
+function displayChartSankeyID85d35328195b() {
+  var pkgs = window.__gvisPackages = window.__gvisPackages || [];
+  var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
+  window.clearTimeout(window.__gvisLoad);
+  // The timeout is set to 100 because otherwise the container div we are
+  // targeting might not be part of the document yet
+  window.__gvisLoad = setTimeout(function() {
+  var pkgCount = pkgs.length;
+  google.load("visualization", "1", { packages:pkgs, callback: function() {
+  if (pkgCount != pkgs.length) {
+  // Race condition where another setTimeout call snuck in after us; if
+  // that call added a package, we must not shift its callback
+  return;
+}
+while (callbacks.length > 0)
+callbacks.shift()();
+} });
+}, 100);
+}
+ 
+// jsFooter
+</script>
+ 
+<!-- jsChart -->  
+<script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartSankeyID85d35328195b"></script>
+ 
+<!-- divChart -->
+  
+<div id="SankeyID85d35328195b" 
+  style="width: 400; height: 400;">
+</div>
