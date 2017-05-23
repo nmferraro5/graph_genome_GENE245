@@ -1,8 +1,24 @@
 # graph_genome_GENE245
 Code for term project in GENE 245
 Represent differences in allele frequencies between populations as a reference graph
-Quantify a new sequence's alignment to the graph via the most likely path
 
+Quantify a new sequence's alignment to the graph via the most likely path
+|
+v
+Reference + Variants_for_Individuals (VCF files from 1000 genomes project) -> Allele frequencies in populations -> Graph representation
+|
+v
+Allele frequency model + graphical Representation
+|
+v
+To represent population variation and enable individual assignment to populations
+
+Challenges:
+- Visual
+- Stats
+- New seq -> most likely path
+- Cluster seqs based on variants
+- How transition matrix varies –> summary metric
 
 ### References
 
