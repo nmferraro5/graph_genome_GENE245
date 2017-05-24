@@ -1,0 +1,191 @@
+<!-- Sankey generated in R 3.3.2 by googleVis 0.6.2 package -->
+<!-- Tue May 23 17:29:08 2017 -->
+
+
+<!-- jsHeader -->
+<script type="text/javascript">
+ 
+// jsData 
+function gvisDataSankeyID85d36388188e () {
+var data = new google.visualization.DataTable();
+var datajson =
+[
+ [
+"ACTGAAACCTGCC",
+"rs1-A",
+0.3,
+"{link: {color: { fill: '#d799ae' } },
+                       node: { width: 4, 
+                       color: { fill: '#a61d4c' },
+                       label: { fontName: 'Times-Roman',
+                       fontSize: 14,
+                       color: '#871b47',
+                       bold: true,
+                       italic: true } }}"
+],
+[
+"ACTGAAACCTGCC",
+"rs1-G",
+0.7,
+"{link: {color: { fill: '#d799ae' } },
+                       node: { width: 4, 
+                       color: { fill: '#a61d4c' },
+                       label: { fontName: 'Times-Roman',
+                       fontSize: 14,
+                       color: '#871b47',
+                       bold: true,
+                       italic: true } }}"
+],
+[
+"rs1-A",
+"CTGACCGTTAA",
+1,
+"{link: {color: { fill: '#d799ae' } },
+                       node: { width: 4, 
+                       color: { fill: '#a61d4c' },
+                       label: { fontName: 'Times-Roman',
+                       fontSize: 14,
+                       color: '#871b47',
+                       bold: true,
+                       italic: true } }}"
+],
+[
+"rs1-G",
+"CTGACCGTTAA",
+1,
+"{link: {color: { fill: '#d799ae' } },
+                       node: { width: 4, 
+                       color: { fill: '#a61d4c' },
+                       label: { fontName: 'Times-Roman',
+                       fontSize: 14,
+                       color: '#871b47',
+                       bold: true,
+                       italic: true } }}"
+],
+[
+"CTGACCGTTAA",
+"rs2-T",
+0.5,
+"{link: {color: { fill: '#d799ae' } },
+                       node: { width: 4, 
+                       color: { fill: '#a61d4c' },
+                       label: { fontName: 'Times-Roman',
+                       fontSize: 14,
+                       color: '#871b47',
+                       bold: true,
+                       italic: true } }}"
+],
+[
+"CTGACCGTTAA",
+"rs2-A",
+0.5,
+"{link: {color: { fill: '#d799ae' } },
+                       node: { width: 4, 
+                       color: { fill: '#a61d4c' },
+                       label: { fontName: 'Times-Roman',
+                       fontSize: 14,
+                       color: '#871b47',
+                       bold: true,
+                       italic: true } }}"
+],
+[
+"rs2-T",
+"GGGGTCCCACTC",
+1,
+"{link: {color: { fill: '#d799ae' } },
+                       node: { width: 4, 
+                       color: { fill: '#a61d4c' },
+                       label: { fontName: 'Times-Roman',
+                       fontSize: 14,
+                       color: '#871b47',
+                       bold: true,
+                       italic: true } }}"
+],
+[
+"rs2-A",
+"GGGGTCCCACTC",
+1,
+"{link: {color: { fill: '#d799ae' } },
+                       node: { width: 4, 
+                       color: { fill: '#a61d4c' },
+                       label: { fontName: 'Times-Roman',
+                       fontSize: 14,
+                       color: '#871b47',
+                       bold: true,
+                       italic: true } }}"
+] 
+];
+data.addColumn('string','source');
+data.addColumn('string','target');
+data.addColumn('number','freq');
+data.addColumn('string','sankey');
+data.addRows(datajson);
+return(data);
+}
+ 
+// jsDrawChart
+function drawChartSankeyID85d36388188e() {
+var data = gvisDataSankeyID85d36388188e();
+var options = {};
+options["width"] = 400;
+options["height"] = 400;
+
+
+    var chart = new google.visualization.Sankey(
+    document.getElementById('SankeyID85d36388188e')
+    );
+    chart.draw(data,options);
+    
+
+}
+  
+ 
+// jsDisplayChart
+(function() {
+var pkgs = window.__gvisPackages = window.__gvisPackages || [];
+var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
+var chartid = "sankey";
+  
+// Manually see if chartid is in pkgs (not all browsers support Array.indexOf)
+var i, newPackage = true;
+for (i = 0; newPackage && i < pkgs.length; i++) {
+if (pkgs[i] === chartid)
+newPackage = false;
+}
+if (newPackage)
+  pkgs.push(chartid);
+  
+// Add the drawChart function to the global list of callbacks
+callbacks.push(drawChartSankeyID85d36388188e);
+})();
+function displayChartSankeyID85d36388188e() {
+  var pkgs = window.__gvisPackages = window.__gvisPackages || [];
+  var callbacks = window.__gvisCallbacks = window.__gvisCallbacks || [];
+  window.clearTimeout(window.__gvisLoad);
+  // The timeout is set to 100 because otherwise the container div we are
+  // targeting might not be part of the document yet
+  window.__gvisLoad = setTimeout(function() {
+  var pkgCount = pkgs.length;
+  google.load("visualization", "1", { packages:pkgs, callback: function() {
+  if (pkgCount != pkgs.length) {
+  // Race condition where another setTimeout call snuck in after us; if
+  // that call added a package, we must not shift its callback
+  return;
+}
+while (callbacks.length > 0)
+callbacks.shift()();
+} });
+}, 100);
+}
+ 
+// jsFooter
+</script>
+ 
+<!-- jsChart -->  
+<script type="text/javascript" src="https://www.google.com/jsapi?callback=displayChartSankeyID85d36388188e"></script>
+ 
+<!-- divChart -->
+  
+<div id="SankeyID85d36388188e" 
+  style="width: 400; height: 400;">
+</div>
