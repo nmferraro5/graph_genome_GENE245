@@ -23,3 +23,11 @@ do
   bedtools intersect -a data/ABCA12/ALL.chr2.sorted.position.vcf -b $file.nochr.bed -wa -wb > $name.intersected.bed
 done
 
+for file in $(ls *.intersected.bed)
+do
+  name=$(echo $file | cut -f 1 -d '.')
+  overlap=$(cat $file | wc -l)
+  orig=$(cat $name.chr2.sorted.bed.nochr.bed | wc -l)
+  echo $name
+  echo $overlap / $orig
+done
