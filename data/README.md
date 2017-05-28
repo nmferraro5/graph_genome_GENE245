@@ -1,5 +1,7 @@
 # Data Sources
 
+#### Added TAB delim format of Chr2 vcf > ALL.chr2.txt
+
 #### Reference genome assembly used in 1000 genomes phase 3
 ```
 wget http://ftp.1000genomes.ebi.ac.uk/vol1/ftp/technical/reference/human_g1k_v37.fasta.gz
