@@ -1,5 +1,10 @@
 # Data Sources
 
+#### File with all 1000 genomes project individuals and their sex and populations assignments
+1000genomes_samples_clean.csv - Reformatted
+1000genomes_samples_orig.csv - Original
+
+
 #### Added TAB delim format of Chr2 vcf > ALL.chr2.txt
 
 #### Reference genome assembly used in 1000 genomes phase 3
