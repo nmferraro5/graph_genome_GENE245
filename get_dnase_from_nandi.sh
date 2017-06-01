@@ -4,18 +4,25 @@ if [ ! -d "dnase_data" ]; then
   mkdir dnase_data
 fi
 
-python add_pos_vcf.py 'data/ALL.noheader.chr2.txt' 'data/ALL.chr2.position.vcf'
-bedtools sort -i data/ALL.chr2.position.vcf > data/ALL.chr2.sorted.position.vcf
-rm data/ALL.chr2.position.vcf
+if [ ! -f "data/ALL.chr2.sorted.position.vcf" ]; then
+  python add_pos_vcf.py 'data/ALL.noheader.chr2.txt' 'data/ALL.chr2.position.vcf'
+  bedtools sort -i data/ALL.chr2.position.vcf > data/ALL.chr2.sorted.position.vcf
+  rm data/ALL.chr2.position.vcf
+fi
 
+tissue=$1
 cd dnase_data
-scp nferraro@nandi.stanford.edu:/mnt/data/integrative/dnase/ENCSR*Skin*.DNase-seq/out*/peak/macs2/rep1/*pval0.1.narrowPeak.gz .
+if [ ! -d $tissue ]; then
+  mkdir $tissue
+fi
+cd $tissue
+scp nferraro@nandi.stanford.edu:/mnt/data/integrative/dnase/ENCSR*$tissue*.DNase-seq/out*/peak/macs2/rep1/*pval0.1.narrowPeak.gz .
 gunzip *.gz
 
 for file in $(ls *.narrowPeak)
 do
   name=$(echo $file | cut -f 1 -d '.')
-  grep "chr2" $file | bedtools sort > $name.chr2.sorted.bed
+  grep "\<chr2\>" $file | bedtools sort > $name.chr2.sorted.bed
   rm $file
 done
 
@@ -24,7 +31,7 @@ do
   name=$(echo $file | cut -f 1 -d '.')
   cat $file | sed 's/^chr//' > $file.nochr.bed
   rm $file
-  bedtools intersect -a ../data/ALL.chr2.sorted.position.vcf -b $file.nochr.bed -wa -wb > $name.intersected.bed
+  bedtools intersect -a ../../data/ALL.chr2.sorted.position.vcf -b $file.nochr.bed -wa -wb > $name.intersected.bed
 done
 
 output_file='peak_overlap.txt'
