@@ -4,38 +4,59 @@ library(ggplot2)
 
 setwd('/Users/nicoleferraro/Documents/Stanford/Spring_1617/STATS345/Project/graph_genome_GENE245/')
 
-#Look at proportion of peaks occurring in gene region of interest (ABCA12) for all samples
-peak_files = dir(path=paste(getwd(), '/dnase_data/', sep=''), pattern='*.chr2.sorted.bed.nochr.bed')
-abca_peaks = rep(0, length(peak_files))
-abca_pvals = rep(0, length(peak_files))
-totals = rep(0, length(peak_files))
-i = 1
+###Peak enrichment analysis
 
-#Includes the gene and upstream genomic region reported in Shimizu, et al.
+#Function to calculate peak enrichment in a gene region as compared to background
+#Inputs: list of sample peak files, gene start and end location, and a boolean if plots are created
+#Returns a list of p-vals describing significance of peak enrichment for that region and peak counts
+get_peak_enrichment <- function(peak_files, gene_start, gene_end, gene_plot)
+{
+  gene_peaks = rep(0, length(peak_files))
+  gene_pvals = rep(0, length(peak_files))
+  totals = rep(0, length(peak_files))
+  gene_length = gene_end - gene_start
+  i = 1
+  #Consider parallelizing if number of samples increases drastically in future
+  for (inFile in peak_files) {
+    peak_data = fread(paste('dnase_data/',inFile, sep=''))
+    starts = peak_data[,2]
+    ends = peak_data[,3]
+    gene_inds = which(peak_data[,2] >= gene_start & peak_data[,3] <= gene_end)
+    #generate 1000 random regions of same length to sample background distribution of peaks
+    rand_inds = sample(min(starts):max(ends)-gene_length, 1000) 
+    bg_peaks = unlist(lapply(rand_inds, function(x) length(which(peak_data[,2] >= x & peak_data[,3] <= x+gene_length))))
+    #Fit a negative binomial
+    exp_fit = fitdist(bg_peaks, "nbinom")
+    hx <- dnbinom(0:max(bg_peaks), size=exp_fit$estimate[1], mu=exp_fit$estimate[2])
+    if (gene_plot == T) {
+      hist(bg_peaks, main='Background peak distribution and negative binomial fit', xlab='# of peaks')
+      par(new=T)
+      plot(0:max(bg_peaks), hx, ylab = "", xaxt='n', yaxt='n', xlab="", col='firebrick4')
+    }
+    #Probability that X is larger than number of peaks seen here
+    gene_pval = pnbinom(length(gene_inds), size=exp_fit$estimate[1], mu=exp_fit$estimate[2], lower.tail=F)
+    gene_peaks[i] = length(gene_inds)
+    gene_pvals[i] = gene_pval
+    totals[i] = nrow(peak_data)
+    i = i + 1
+  }
+  return(list(gene_peaks, gene_pvals))
+}
+
+#Grab all current peak files
+peak_files = dir(path=paste(getwd(), '/dnase_data/', sep=''), pattern='*.chr2.sorted.bed.nochr.bed')
+
+#Includes the gene and upstream genomic region reported in Shimizu, et al., so no 1000kb region added
 abca_start = 214931541
 abca_end = 216017439
-abca_length = abca_end - abca_start
-for (inFile in peak_files) {
-  peak_data = fread(paste('dnase_data/',inFile, sep=''))
-  starts = peak_data[,2]
-  ends = peak_data[,3]
-  abca_inds = which(peak_data[,2] >= abca_start & peak_data[,3] <= abca_end)
-  #generate 1000 random regions of same length to sample background distribution of peaks
-  rand_inds = sample(min(starts):max(ends)-abca_length, 1000) 
-  bg_peaks = unlist(lapply(rand_inds, function(x) length(which(peak_data[,2] >= x & peak_data[,3] <= x+abca_length))))
-  hist(bg_peaks, main='Background peak distribution and negative binomial fit', xlab='# of peaks')
-  par(new=T)
-  #Fit a negative binomial
-  exp_fit = fitdist(bg_peaks, "nbinom")
-  hx <- dnbinom(0:max(bg_peaks), size=exp_fit$estimate[1], mu=exp_fit$estimate[2])
-  plot(0:max(bg_peaks), hx, ylab = "", xaxt='n', yaxt='n', xlab="", col='firebrick4')
-  #Probability that X is larger than number of peaks seen here
-  abca_pval = pnbinom(length(abca_inds), size=exp_fit$estimate[1], mu=exp_fit$estimate[2], lower.tail=F)
-  abca_peaks[i] = length(abca_inds)
-  abca_pvals[i] = abca_pval
-  totals[i] = nrow(peak_data)
-  i = i + 1
-}
+#To include potential regulatory regions, add 1000kb
+znf_start = 184598366 - 1000000
+znf_end = 184939492 + 1000000
+
+abca_pe = get_peak_enrichment(peak_files, abca_start, abca_end, FALSE)
+znf_pe = get_peak_enrichment(peak_files, znf_start, znf_end, FALSE)
+
+###Overlap of peaks and variants analysis
 
 #Read in sample information file
 metadata = fread('dnase_metadata_2016-12-05.txt')
