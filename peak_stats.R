@@ -7,14 +7,15 @@ setwd('/Users/nicoleferraro/Documents/Stanford/Spring_1617/STATS345/Project/grap
 #Look at proportion of peaks occurring in gene region of interest (ABCA12) for all samples
 peak_files = dir(path=paste(getwd(), '/dnase_data/', sep=''), pattern='*.chr2.sorted.bed.nochr.bed')
 abca_peaks = rep(0, length(peak_files))
+abca_pvals = rep(0, length(peak_files))
 totals = rep(0, length(peak_files))
 i = 1
 
 #Includes the gene and upstream genomic region reported in Shimizu, et al.
-abca_start = 214931542
+abca_start = 214931541
 abca_end = 216017439
 abca_length = abca_end - abca_start
-for (inFile in peak_files[1]) {
+for (inFile in peak_files) {
   peak_data = fread(paste('dnase_data/',inFile, sep=''))
   starts = peak_data[,2]
   ends = peak_data[,3]
@@ -24,15 +25,14 @@ for (inFile in peak_files[1]) {
   bg_peaks = unlist(lapply(rand_inds, function(x) length(which(peak_data[,2] >= x & peak_data[,3] <= x+abca_length))))
   hist(bg_peaks, main='Background peak distribution and negative binomial fit', xlab='# of peaks')
   par(new=T)
-  #Fit a negative binomial (poisson was also tried, but had larger error, probably due to overdispersion towards low end)
+  #Fit a negative binomial
   exp_fit = fitdist(bg_peaks, "nbinom")
   hx <- dnbinom(0:max(bg_peaks), size=exp_fit$estimate[1], mu=exp_fit$estimate[2])
   plot(0:max(bg_peaks), hx, ylab = "", xaxt='n', yaxt='n', xlab="", col='firebrick4')
   #Probability that X is larger than number of peaks seen here
   abca_pval = pnbinom(length(abca_inds), size=exp_fit$estimate[1], mu=exp_fit$estimate[2], lower.tail=F)
-  print(abca_pval)
-  print(length(abca_inds))
   abca_peaks[i] = length(abca_inds)
+  abca_pvals[i] = abca_pval
   totals[i] = nrow(peak_data)
   i = i + 1
 }
