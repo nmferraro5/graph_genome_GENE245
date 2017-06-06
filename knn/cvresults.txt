@@ -1,0 +1,65 @@
+k-Nearest Neighbors 
+
+1046 samples
+5888 predictors
+   2 classes: 'AFR', 'EUR' 
+
+No pre-processing
+Resampling: Cross-Validated (10 fold, repeated 3 times) 
+Summary of sample sizes: 942, 941, 941, 941, 941, 942, ... 
+Resampling results across tuning parameters:
+
+  k   Accuracy   Kappa    
+   5  0.9681288  0.9353199
+   7  0.9627045  0.9244757
+   9  0.9627106  0.9244543
+  11  0.9614469  0.9219288
+  13  0.9636722  0.9264669
+  15  0.9627137  0.9245203
+  17  0.9633486  0.9258449
+  19  0.9620665  0.9232798
+  21  0.9592033  0.9175015
+  23  0.9598321  0.9187497
+  25  0.9607814  0.9205798
+  27  0.9611020  0.9212974
+  29  0.9601435  0.9193427
+  31  0.9611050  0.9212820
+  33  0.9607814  0.9206031
+  35  0.9595116  0.9180389
+  37  0.9591911  0.9173257
+  39  0.9595147  0.9179911
+  41  0.9604701  0.9198853
+  43  0.9598321  0.9185700
+
+Accuracy was used to select the optimal model using  the largest value.
+The final value used for the model was k = 5.
+See corresponding plot of K and Accuracy: cvresults_plot1.png
+
+
+Prediction results
+
+Confusion Matrix and Statistics
+
+          Reference
+Prediction AFR EUR
+       AFR  62   0
+       EUR   5  51
+                                          
+               Accuracy : 0.9576          
+                 95% CI : (0.9039, 0.9861)
+    No Information Rate : 0.5678          
+    P-Value [Acc > NIR] : < 2e-16         
+                                          
+                  Kappa : 0.9147          
+ Mcnemar's Test P-Value : 0.07364         
+                                          
+            Sensitivity : 0.9254          
+            Specificity : 1.0000          
+         Pos Pred Value : 1.0000          
+         Neg Pred Value : 0.9107          
+             Prevalence : 0.5678          
+         Detection Rate : 0.5254          
+   Detection Prevalence : 0.5254          
+      Balanced Accuracy : 0.9627          
+                                          
+       'Positive' Class : AFR  
