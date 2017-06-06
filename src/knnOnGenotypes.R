@@ -14,7 +14,7 @@ library(pROC)
 
 # Function to format a tab delim genotype file (col=samples, row=rsids)
 # Call on input file. Only keeps individuals of pop1 and pop2
-# INPUT genoFile: use get_data_tkg.sh to convert vcf to genotype tab delim file
+# INPUT genoFile: use get_1000genomes_data.sh to convert vcf to genotype tab delim file
 # INPUT pop1,pop2: 1000 genomes population codes, {"EAS","SEA","AFR","EUR","AMR"}
 # OUTPUT data frame with rows as samples, columns as rsids, cells as numeric genotypes
 

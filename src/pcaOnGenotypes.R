@@ -10,7 +10,7 @@ library(ggfortify)
 
 # Data file paths
 # These files were downloaded from 1000 genomes site and formatted 
-# using get_tkg_data.sh
+# using get_1000genomes_data.sh
 home="~/Documents/stanford/classes/spring17/bmi245/project/graph_genome_GENE245/data/"
 abca12GenoFile = paste0(home,"ABCA12/ALL.2.215796266-216003151.justGenotypes.txt")
 znfGenoFile = paste0(home,"ZNF/ALL.2.185463093-185804214.justGenotypes.txt")

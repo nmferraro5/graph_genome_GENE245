@@ -1,3 +1,6 @@
+# For GENE245 PROJECT 
+# Margaret Antonio and Nicole Ferraro
+
 # Data for Population Variants for ABCA12
 
 #### 1. Download phase 3 all variants for chr2
