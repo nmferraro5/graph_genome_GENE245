@@ -1,5 +1,4 @@
-### Margaret Antonio
-### GENE245 Project with Nicole Ferraro
+## GENE245 Project Margaret Antonio and Nicole Ferraro
 
 ### Functions to (a) Read genotype file as data frame for two classes
 ###              (b) Train KNN model 

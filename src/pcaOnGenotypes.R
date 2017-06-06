@@ -1,5 +1,4 @@
-### Margaret Antonio
-### GENE245 Project with Nicole Ferraro
+### GENE245 Project Margaret Antonio and Nicole Ferraro
 
 ### Functions to run PCA on 1000 genomes data for two populations
 ### Requires getPops() function in knnOnGenotypes.R
